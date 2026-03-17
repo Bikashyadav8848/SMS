@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Marks{% endblock %}
+
+{% block content %}
+<h2>Exam Marks</h2>
+<a href="{% url 'marks_add' %}" class="btn btn-success mb-3">Add Marks</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Subject</th>
+            <th>Marks</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for mark in marks %}
+        <tr>
+            <td>{{ mark.student.name }}</td>
+            <td>{{ mark.subject }}</td>
+            <td>{{ mark.marks }}</td>
+            <td>
+                <a href="{% url 'marks_edit' mark.pk %}" class="btn btn-sm btn-primary">Edit</a>
+                <a href="{% url 'marks_delete' mark.pk %}" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No marks found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

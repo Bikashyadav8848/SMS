@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Marks{% endblock %}
+
+{% block content %}
+<h2>Delete Marks</h2>
+<p>Are you sure you want to delete marks for "{{ object.student.name }}" in {{ object.subject }}?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+    <a href="{% url 'marks' %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

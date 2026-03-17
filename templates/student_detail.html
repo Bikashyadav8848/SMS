@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Student Detail{% endblock %}
+
+{% block content %}
+<h2>Student Details</h2>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">{{ object.name }}</h5>
+        <p class="card-text"><strong>Email:</strong> {{ object.email }}</p>
+        <p class="card-text"><strong>Roll Number:</strong> {{ object.roll_number }}</p>
+        <a href="{% url 'student_edit' object.pk %}" class="btn btn-primary">Edit</a>
+        <a href="{% url 'student_delete' object.pk %}" class="btn btn-danger">Delete</a>
+        <a href="{% url 'students' %}" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>
+{% endblock %}

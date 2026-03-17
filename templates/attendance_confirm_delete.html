@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Attendance{% endblock %}
+
+{% block content %}
+<h2>Delete Attendance</h2>
+<p>Are you sure you want to delete attendance for "{{ object.student.name }}" on {{ object.date }}?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+    <a href="{% url 'attendance' %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}
