@@ -49,4 +49,6 @@ urlpatterns = [
     path('marks/add/', views.MarksCreateView.as_view(), name='marks_add'),
     path('marks/<int:pk>/edit/', views.MarksUpdateView.as_view(), name='marks_edit'),
     path('marks/<int:pk>/delete/', views.MarksDeleteView.as_view(), name='marks_delete'),
+    # Subjects
+    path('subjects/', include('subjects.urls')),
 ]

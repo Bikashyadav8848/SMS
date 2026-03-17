@@ -3,33 +3,63 @@
 {% block title %}Marks{% endblock %}
 
 {% block content %}
-<h2>Exam Marks</h2>
-<a href="{% url 'marks_add' %}" class="btn btn-success mb-3">Add Marks</a>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Student</th>
-            <th>Subject</th>
-            <th>Marks</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for mark in marks %}
-        <tr>
-            <td>{{ mark.student.name }}</td>
-            <td>{{ mark.subject }}</td>
-            <td>{{ mark.marks }}</td>
-            <td>
-                <a href="{% url 'marks_edit' mark.pk %}" class="btn btn-sm btn-primary">Edit</a>
-                <a href="{% url 'marks_delete' mark.pk %}" class="btn btn-sm btn-danger">Delete</a>
-            </td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td colspan="4">No marks found.</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<style>
+    .action-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+    .empty-state { text-align: center; padding: 3rem; background: white; border-radius: 1rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); }
+    .empty-state-icon { font-size: 3rem; color: #d1d5db; margin-bottom: 1rem; }
+    .marks-badge { padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 700; font-size: 0.95rem; display: inline-block; }
+    .marks-excellent { background: #d1fae5; color: #065f46; }
+    .marks-good { background: #dbeafe; color: #0c2d6b; }
+    .marks-average { background: #fef3c7; color: #78350f; }
+    .marks-poor { background: #fee2e2; color: #7f1d1d; }
+</style>
+
+<div class="action-bar">
+    <h2><i class="fas fa-chart-bar"></i> Exam Marks</h2>
+    <a href="{% url 'marks_add' %}" class="btn btn-success"><i class="fas fa-plus"></i> Add Marks</a>
+</div>
+
+{% if marks %}
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th><i class="fas fa-user"></i> Student</th>
+                <th><i class="fas fa-book"></i> Subject</th>
+                <th><i class="fas fa-star"></i> Marks</th>
+                <th><i class="fas fa-cog"></i> Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mark in marks %}
+            <tr>
+                <td>{{ mark.student.name }}</td>
+                <td><span class="badge" style="background: #d1fae5; color: #065f46;">{{ mark.subject }}</span></td>
+                <td>
+                    {% if mark.marks >= 80 %}
+                        <span class="marks-badge marks-excellent">{{ mark.marks }}/100</span>
+                    {% elif mark.marks >= 60 %}
+                        <span class="marks-badge marks-good">{{ mark.marks }}/100</span>
+                    {% elif mark.marks >= 40 %}
+                        <span class="marks-badge marks-average">{{ mark.marks }}/100</span>
+                    {% else %}
+                        <span class="marks-badge marks-poor">{{ mark.marks }}/100</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'marks_edit' mark.pk %}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
+                    <a href="{% url 'marks_delete' mark.pk %}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="empty-state">
+    <div class="empty-state-icon"><i class="fas fa-inbox"></i></div>
+    <p>No marks found. Start by adding exam marks.</p>
+    <a href="{% url 'marks_add' %}" class="btn btn-primary"><i class="fas fa-plus"></i> Add First Record</a>
+</div>
+{% endif %}
 {% endblock %}

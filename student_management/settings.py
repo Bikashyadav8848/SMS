@@ -16,7 +16,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'accounts', 'students', 'teachers', 'classes', 'attendance', 'exams'
+    'accounts', 'students', 'teachers', 'classes', 'attendance', 'exams', 'subjects'
 ]
 
 MIDDLEWARE = [

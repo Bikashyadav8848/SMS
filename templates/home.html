@@ -3,26 +3,212 @@
 {% block title %}Home - Student Management System{% endblock %}
 
 {% block content %}
-<div class="jumbotron bg-light p-5 rounded">
-    <h1 class="display-4">Welcome to Student Management System</h1>
-    <p class="lead">Manage students, teachers, classes, attendance, and exam marks efficiently.</p>
+<style>
+    .jumbotron {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        color: white !important;
+        border-radius: 1rem;
+        padding: 3rem 2rem !important;
+        margin-bottom: 2rem;
+    }
+
+    .jumbotron h1 {
+        color: white;
+        margin-bottom: 1rem;
+        font-size: 2.5rem;
+    }
+
+    .jumbotron .lead {
+        font-size: 1.25rem;
+        margin-bottom: 1.5rem;
+        opacity: 0.95;
+    }
+
+    .jumbotron hr {
+        border-color: rgba(255, 255, 255, 0.3);
+        margin: 1.5rem 0;
+    }
+
+    .feature-card {
+        background: white;
+        border-radius: 1rem;
+        padding: 2rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        border: 2px solid #e5e7eb;
+        height: 100%;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .feature-card:hover {
+        transform: translateY(-8px);
+        border-color: #4f46e5;
+        box-shadow: 0 12px 24px rgba(79, 70, 229, 0.15);
+    }
+
+    .feature-card-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: #4f46e5;
+    }
+
+    .feature-card h5 {
+        color: #4f46e5;
+        margin-bottom: 1rem;
+        font-size: 1.25rem;
+        font-weight: 600;
+    }
+
+    .feature-card p {
+        color: #6b7280;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+    }
+
+    .feature-card .btn {
+        width: 100%;
+    }
+
+    .stats-row {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .stat-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 1rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        text-align: center;
+        margin-bottom: 1.5rem;
+        border-left: 4px solid #4f46e5;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #4f46e5;
+    }
+
+    .stat-label {
+        color: #6b7280;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+</style>
+
+<div class="jumbotron">
+    <h1 class="display-4"><i class="fas fa-graduation-cap"></i> Welcome to Student Management System</h1>
+    <p class="lead">Efficiently manage students, teachers, classes, attendance, and exam marks all in one place.</p>
     <hr class="my-4">
-    <p>Navigate using the menu above or explore the sections below.</p>
+    <p>Use the navigation menu or explore the sections below to get started.</p>
+</div>
+
+<div class="stats-row">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-number"><i class="fas fa-users"></i> {{ total_students }}</div>
+                <div class="stat-label">Total Students</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card" style="border-left-color: #10b981;">
+                <div class="stat-number" style="color: #10b981;"><i class="fas fa-chalkboard-user"></i> {{ total_teachers }}</div>
+                <div class="stat-label">Total Teachers</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card" style="border-left-color: #f59e0b;">
+                <div class="stat-number" style="color: #f59e0b;"><i class="fas fa-book"></i> {{ total_classes }}</div>
+                <div class="stat-label">Total Classes</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card" style="border-left-color: #8b5cf6;">
+                <div class="stat-number" style="color: #8b5cf6;"><i class="fas fa-bookmark"></i> {{ total_subjects }}</div>
+                <div class="stat-label">Total Subjects</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="feature-card">
+            <div class="feature-card-icon">
+                <i class="fas fa-users"></i>
+            </div>
             <h5>Students</h5>
-            <p>View and manage student records.</p>
-            <a class="btn btn-primary" href="/students/">Go to Students</a>
+            <p>Add, view, and manage student records with complete information including contact details and enrollment status.</p>
+            <a class="btn btn-primary" href="/students/">
+                <i class="fas fa-arrow-right"></i> Manage Students
+            </a>
         </div>
-        <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+        <div class="feature-card">
+            <div class="feature-card-icon" style="color: #10b981;">
+                <i class="fas fa-chalkboard-user"></i>
+            </div>
             <h5>Teachers</h5>
-            <p>Manage teacher information.</p>
-            <a class="btn btn-primary" href="/teachers/">Go to Teachers</a>
+            <p>Manage teacher information, subject assignments, and department details efficiently.</p>
+            <a class="btn btn-success" href="/teachers/">
+                <i class="fas fa-arrow-right"></i> Manage Teachers
+            </a>
         </div>
-        <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+        <div class="feature-card">
+            <div class="feature-card-icon" style="color: #f59e0b;">
+                <i class="fas fa-book"></i>
+            </div>
             <h5>Classes</h5>
-            <p>Organize class details.</p>
-            <a class="btn btn-primary" href="/classes/">Go to Classes</a>
+            <p>Organize and manage class details, schedules, and classroom assignments.</p>
+            <a class="btn btn-warning" href="/classes/" style="background: #f59e0b;">
+                <i class="fas fa-arrow-right"></i> Manage Classes
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="feature-card">
+            <div class="feature-card-icon" style="color: #8b5cf6;">
+                <i class="fas fa-bookmark"></i>
+            </div>
+            <h5>Subjects</h5>
+            <p>Create and manage subjects, assign teachers to subjects, and organize course content.</p>
+            <a class="btn btn-primary" href="/subjects/" style="background: #8b5cf6;">
+                <i class="fas fa-arrow-right"></i> Manage Subjects
+            </a>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="feature-card">
+            <div class="feature-card-icon" style="color: #3b82f6;">
+                <i class="fas fa-clipboard-list"></i>
+            </div>
+            <h5>Attendance</h5>
+            <p>Track and manage student attendance records with ease and generate attendance reports.</p>
+            <a class="btn btn-info" href="/attendance/" style="background: #3b82f6;">
+                <i class="fas fa-arrow-right"></i> Manage Attendance
+            </a>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="feature-card">
+            <div class="feature-card-icon" style="color: #ec4899;">
+                <i class="fas fa-chart-bar"></i>
+            </div>
+            <h5>Marks & Exams</h5>
+            <p>Record and manage exam marks, calculate grades, and track student performance.</p>
+            <a class="btn btn-danger" href="/marks/" style="background: #ec4899;">
+                <i class="fas fa-arrow-right"></i> Manage Marks
+            </a>
         </div>
     </div>
 </div>

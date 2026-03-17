@@ -3,33 +3,48 @@
 {% block title %}Students{% endblock %}
 
 {% block content %}
-<h2>Students</h2>
-<a href="{% url 'student_add' %}" class="btn btn-success mb-3">Add Student</a>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Roll Number</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for student in students %}
-        <tr>
-            <td><a href="{% url 'student_detail' student.pk %}">{{ student.name }}</a></td>
-            <td>{{ student.email }}</td>
-            <td>{{ student.roll_number }}</td>
-            <td>
-                <a href="{% url 'student_edit' student.pk %}" class="btn btn-sm btn-primary">Edit</a>
-                <a href="{% url 'student_delete' student.pk %}" class="btn btn-sm btn-danger">Delete</a>
-            </td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td colspan="4">No students found.</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<style>
+    .action-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+    .empty-state { text-align: center; padding: 3rem; background: white; border-radius: 1rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); }
+    .empty-state-icon { font-size: 3rem; color: #d1d5db; margin-bottom: 1rem; }
+</style>
+
+<div class="action-bar">
+    <h2><i class="fas fa-users"></i> Students</h2>
+    <a href="{% url 'student_add' %}" class="btn btn-success"><i class="fas fa-plus"></i> Add Student</a>
+</div>
+
+{% if students %}
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th><i class="fas fa-user"></i> Name</th>
+                <th><i class="fas fa-envelope"></i> Email</th>
+                <th><i class="fas fa-id-card"></i> Roll Number</th>
+                <th><i class="fas fa-cog"></i> Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td><a href="{% url 'student_detail' student.pk %}">{{ student.name }}</a></td>
+                <td>{{ student.email }}</td>
+                <td><span class="badge" style="background: #dbeafe; color: #0c2d6b;">{{ student.roll_number }}</span></td>
+                <td>
+                    <a href="{% url 'student_edit' student.pk %}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
+                    <a href="{% url 'student_delete' student.pk %}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="empty-state">
+    <div class="empty-state-icon"><i class="fas fa-inbox"></i></div>
+    <p>No students found. Start by adding a new student.</p>
+    <a href="{% url 'student_add' %}" class="btn btn-primary"><i class="fas fa-plus"></i> Add First Student</a>
+</div>
+{% endif %}
 {% endblock %}

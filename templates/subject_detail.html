@@ -1,45 +1,47 @@
 {% extends 'base.html' %}
 
-{% block title %}Student Detail{% endblock %}
+{% block title %}Subject Detail{% endblock %}
 
 {% block content %}
 <style>
     .detail-card { background: white; border-radius: 1rem; overflow: hidden; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); max-width: 600px; margin: 0 auto; }
-    .detail-header { background: linear-gradient(90deg, #4f46e5 0%, #6366f1 100%); color: white; padding: 2rem; }
+    .detail-header { background: linear-gradient(90deg, #8b5cf6 0%, #a78bfa 100%); color: white; padding: 2rem; }
     .detail-header h1 { color: white; margin: 0; font-size: 2rem; }
     .detail-body { padding: 2rem; }
     .detail-row { display: flex; padding: 1rem 0; border-bottom: 1px solid #e5e7eb; }
     .detail-row:last-child { border-bottom: none; }
-    .detail-label { font-weight: 600; color: #4f46e5; min-width: 150px; }
+    .detail-label { font-weight: 600; color: #8b5cf6; min-width: 150px; }
     .detail-value { color: #1f2937; }
     .detail-buttons { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
     .detail-buttons .btn { flex: 1; min-width: 150px; }
+    .btn-purple { background: #8b5cf6; }
+    .btn-purple:hover { background: #7c3aed; }
 </style>
 
 <div class="detail-card">
     <div class="detail-header">
-        <h1><i class="fas fa-user-circle"></i> {{ object.name }}</h1>
+        <h1><i class="fas fa-bookmark"></i> {{ object.name }}</h1>
     </div>
     
     <div class="detail-body">
         <div class="detail-row">
-            <div class="detail-label"><i class="fas fa-envelope"></i> Email:</div>
-            <div class="detail-value">{{ object.email }}</div>
+            <div class="detail-label"><i class="fas fa-chalkboard-user"></i> Teacher:</div>
+            <div class="detail-value">{{ object.teacher.name }}</div>
         </div>
         
         <div class="detail-row">
-            <div class="detail-label"><i class="fas fa-id-card"></i> Roll Number:</div>
-            <div class="detail-value">{{ object.roll_number }}</div>
+            <div class="detail-label"><i class="fas fa-align-left"></i> Description:</div>
+            <div class="detail-value">{{ object.description|default:"No description" }}</div>
         </div>
         
         <div class="detail-buttons">
-            <a href="{% url 'student_edit' object.pk %}" class="btn btn-primary">
+            <a href="{% url 'subject_edit' object.pk %}" class="btn btn-purple">
                 <i class="fas fa-edit"></i> Edit
             </a>
-            <a href="{% url 'student_delete' object.pk %}" class="btn btn-danger">
+            <a href="{% url 'subject_delete' object.pk %}" class="btn btn-danger">
                 <i class="fas fa-trash"></i> Delete
             </a>
-            <a href="{% url 'students' %}" class="btn btn-secondary">
+            <a href="{% url 'subjects' %}" class="btn btn-secondary">
                 <i class="fas fa-arrow-left"></i> Back to List
             </a>
         </div>

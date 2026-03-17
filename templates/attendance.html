@@ -3,33 +3,59 @@
 {% block title %}Attendance{% endblock %}
 
 {% block content %}
-<h2>Attendance</h2>
-<a href="{% url 'attendance_add' %}" class="btn btn-success mb-3">Add Attendance</a>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Student</th>
-            <th>Date</th>
-            <th>Status</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for attendance in attendances %}
-        <tr>
-            <td>{{ attendance.student.name }}</td>
-            <td>{{ attendance.date }}</td>
-            <td>{{ attendance.status }}</td>
-            <td>
-                <a href="{% url 'attendance_edit' attendance.pk %}" class="btn btn-sm btn-primary">Edit</a>
-                <a href="{% url 'attendance_delete' attendance.pk %}" class="btn btn-sm btn-danger">Delete</a>
-            </td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td colspan="4">No attendance records found.</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<style>
+    .action-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+    .empty-state { text-align: center; padding: 3rem; background: white; border-radius: 1rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); }
+    .empty-state-icon { font-size: 3rem; color: #d1d5db; margin-bottom: 1rem; }
+    .status-badge { padding: 0.35rem 0.75rem; border-radius: 0.25rem; font-weight: 600; text-transform: uppercase; font-size: 0.75rem; }
+    .status-present { background: #d1fae5; color: #065f46; }
+    .status-absent { background: #fee2e2; color: #7f1d1d; }
+</style>
+
+<div class="action-bar">
+    <h2><i class="fas fa-clipboard-list"></i> Attendance</h2>
+    <a href="{% url 'attendance_add' %}" class="btn btn-success"><i class="fas fa-plus"></i> Add Attendance</a>
+</div>
+
+{% if attendances %}
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th><i class="fas fa-user"></i> Student</th>
+                <th><i class="fas fa-calendar"></i> Date</th>
+                <th><i class="fas fa-check"></i> Status</th>
+                <th><i class="fas fa-cog"></i> Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for attendance in attendances %}
+            <tr>
+                <td>{{ attendance.student.name }}</td>
+                <td>{{ attendance.date|date:"d/m/Y" }}</td>
+                <td>
+                    {% if attendance.status == 'Present' %}
+                        <span class="status-badge status-present">Present</span>
+                    {% elif attendance.status == 'Absent' %}
+                        <span class="status-badge status-absent">Absent</span>
+                    {% else %}
+                        <span class="status-badge" style="background: #fef3c7; color: #78350f;">{{ attendance.status }}</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'attendance_edit' attendance.pk %}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
+                    <a href="{% url 'attendance_delete' attendance.pk %}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="empty-state">
+    <div class="empty-state-icon"><i class="fas fa-inbox"></i></div>
+    <p>No attendance records found. Start by adding attendance.</p>
+    <a href="{% url 'attendance_add' %}" class="btn btn-primary"><i class="fas fa-plus"></i> Add Attendance</a>
+</div>
+{% endif %}
 {% endblock %}

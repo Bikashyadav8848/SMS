@@ -3,31 +3,46 @@
 {% block title %}Teachers{% endblock %}
 
 {% block content %}
-<h2>Teachers</h2>
-<a href="{% url 'teacher_add' %}" class="btn btn-success mb-3">Add Teacher</a>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Subject</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for teacher in teachers %}
-        <tr>
-            <td>{{ teacher.name }}</td>
-            <td>{{ teacher.subject }}</td>
-            <td>
-                <a href="{% url 'teacher_edit' teacher.pk %}" class="btn btn-sm btn-primary">Edit</a>
-                <a href="{% url 'teacher_delete' teacher.pk %}" class="btn btn-sm btn-danger">Delete</a>
-            </td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td colspan="3">No teachers found.</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<style>
+    .action-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+    .empty-state { text-align: center; padding: 3rem; background: white; border-radius: 1rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); }
+    .empty-state-icon { font-size: 3rem; color: #d1d5db; margin-bottom: 1rem; }
+</style>
+
+<div class="action-bar">
+    <h2><i class="fas fa-chalkboard-user"></i> Teachers</h2>
+    <a href="{% url 'teacher_add' %}" class="btn btn-success"><i class="fas fa-plus"></i> Add Teacher</a>
+</div>
+
+{% if teachers %}
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th><i class="fas fa-user"></i> Name</th>
+                <th><i class="fas fa-book"></i> Subject</th>
+                <th><i class="fas fa-cog"></i> Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for teacher in teachers %}
+            <tr>
+                <td>{{ teacher.name }}</td>
+                <td><span class="badge" style="background: #d1fae5; color: #065f46;">{{ teacher.subject }}</span></td>
+                <td>
+                    <a href="{% url 'teacher_edit' teacher.pk %}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
+                    <a href="{% url 'teacher_delete' teacher.pk %}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="empty-state">
+    <div class="empty-state-icon"><i class="fas fa-inbox"></i></div>
+    <p>No teachers found. Start by adding a new teacher.</p>
+    <a href="{% url 'teacher_add' %}" class="btn btn-success"><i class="fas fa-plus"></i> Add First Teacher</a>
+</div>
+{% endif %}
 {% endblock %}

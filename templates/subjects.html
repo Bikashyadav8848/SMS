@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Subjects{% endblock %}
+
+{% block content %}
+<style>
+    .action-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+    .empty-state { text-align: center; padding: 3rem; background: white; border-radius: 1rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); }
+    .empty-state-icon { font-size: 3rem; color: #d1d5db; margin-bottom: 1rem; }
+</style>
+
+<div class="action-bar">
+    <h2><i class="fas fa-bookmark"></i> Subjects</h2>
+    <a href="{% url 'subject_add' %}" class="btn btn-success"><i class="fas fa-plus"></i> Add Subject</a>
+</div>
+
+{% if subjects %}
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th><i class="fas fa-bookmark"></i> Subject Name</th>
+                <th><i class="fas fa-chalkboard-user"></i> Teacher Name</th>
+                <th><i class="fas fa-align-left"></i> Description</th>
+                <th><i class="fas fa-cog"></i> Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for subject in subjects %}
+            <tr>
+                <td><a href="{% url 'subject_detail' subject.pk %}">{{ subject.name }}</a></td>
+                <td><span class="badge" style="background: #d1fae5; color: #065f46;">{{ subject.teacher.name }}</span></td>
+                <td>{{ subject.description|truncatewords:10 }}</td>
+                <td>
+                    <a href="{% url 'subject_edit' subject.pk %}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
+                    <a href="{% url 'subject_delete' subject.pk %}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="empty-state">
+    <div class="empty-state-icon"><i class="fas fa-inbox"></i></div>
+    <p>No subjects found. Start by adding a new subject.</p>
+    <a href="{% url 'subject_add' %}" class="btn btn-success"><i class="fas fa-plus"></i> Add First Subject</a>
+</div>
+{% endif %}
+{% endblock %}

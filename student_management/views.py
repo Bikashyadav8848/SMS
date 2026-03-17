@@ -6,10 +6,17 @@ from teachers.models import Teacher
 from classes.models import Class
 from attendance.models import Attendance
 from exams.models import Marks
+from subjects.models import Subject
 
 # Home
 def home(request):
-    return render(request, 'home.html')
+    context = {
+        'total_students': Student.objects.count(),
+        'total_teachers': Teacher.objects.count(),
+        'total_classes': Class.objects.count(),
+        'total_subjects': Subject.objects.count(),
+    }
+    return render(request, 'home.html', context)
 
 # Students
 class StudentListView(ListView):

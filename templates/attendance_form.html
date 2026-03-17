@@ -3,11 +3,57 @@
 {% block title %}{% if object %}Edit Attendance{% else %}Add Attendance{% endif %}{% endblock %}
 
 {% block content %}
-<h2>{% if object %}Edit Attendance{% else %}Add Attendance{% endif %}</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Save</button>
-    <a href="{% url 'attendance' %}" class="btn btn-secondary">Cancel</a>
-</form>
+<style>
+    .form-container { max-width: 700px; margin: 0 auto; padding: 2rem; }
+    .form-card { background: white; padding: 2.5rem; border-radius: 1rem; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); border-top: 4px solid #3b82f6; }
+    .form-card h2 { text-align: center; padding: 0; margin: 0 0 2rem 0; color: #1f2937; font-size: 1.75rem; }
+    .form-card h2 i { color: #3b82f6; margin-right: 0.5rem; }
+    .form-group { margin-bottom: 1.75rem; }
+    .form-label { font-weight: 600; color: #1f2937; margin-bottom: 0.75rem; display: block; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .form-control, select, textarea { width: 100%; border: 2px solid #e5e7eb; border-radius: 0.5rem; padding: 0.875rem 1rem; font-size: 1rem; transition: all 0.3s ease; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: white; }
+    .form-control:focus, select:focus, textarea:focus { border-color: #3b82f6; box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1); outline: none; background: #f0f9ff; }
+    select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%233b82f6' d='M6 9L1 4h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; cursor: pointer; }
+    .form-errors { color: #ef4444; font-size: 0.875rem; margin-top: 0.5rem; padding: 0.75rem; background: #fee2e2; border-radius: 0.4rem; border-left: 3px solid #ef4444; }
+    .button-group { display: flex; gap: 1rem; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; }
+    .button-group .btn { flex: 1; padding: 0.875rem 1.5rem; font-size: 1rem; font-weight: 600; }
+    .button-group .btn i { margin-right: 0.5rem; }
+    .button-group .btn-info { background: #3b82f6; }
+    .button-group .btn-info:hover { background: #2563eb; }
+    .form-instructions { background: #f0f9ff; padding: 1.25rem; border-radius: 0.5rem; margin-bottom: 2rem; border-left: 4px solid #3b82f6; color: #0c2d6b; font-size: 0.9rem; }
+    .required-field::after { content: " *"; color: #ef4444; font-weight: bold; }
+</style>
+
+<div class="form-container">
+    <div class="form-card">
+        <h2>
+            <i class="fas fa-{% if object %}edit{% else %}plus-circle{% endif %}"></i>
+            {% if object %}Edit Attendance{% else %}Add Attendance{% endif %}
+        </h2>
+
+        <div class="form-instructions">
+            <i class="fas fa-info-circle"></i>
+            Please fill in all the required fields marked with <span style="color: #ef4444; font-weight: bold;">*</span>
+        </div>
+
+        <form method="post" novalidate>
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group">
+                    <label class="form-label {% if field.field.required %}required-field{% endif %}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="form-errors">
+                            {% for error in field.errors %}<div><i class="fas fa-times-circle"></i> {{ error }}</div>{% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <div class="button-group">
+                <button type="submit" class="btn btn-info"><i class="fas fa-save"></i> Save</button>
+                <a href="{% url 'attendance' %}" class="btn btn-secondary"><i class="fas fa-times"></i> Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}
