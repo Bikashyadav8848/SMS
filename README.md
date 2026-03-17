@@ -71,4 +71,7 @@ If you want custom features (authentication, search, reports, export to CSV/PDF)
 
 ---
 
-**Author:** Bikash Kumar Yadav
+## 👨‍💻 Author
+✨ **Bikash Kumar Yadav** ✨
+
+*Building amazing web applications with Django & Python*
