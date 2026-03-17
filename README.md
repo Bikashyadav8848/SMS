@@ -68,6 +68,8 @@ If you created the admin user as described, use those values to log in.
 ---
 
 If you want custom features (authentication, search, reports, export to CSV/PDF), just ask!
+## Contributors
+- Raj Gimbhal
 
 ---
 
