@@ -1,3 +1,4 @@
+from datetime import date
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -213,9 +214,15 @@ def fees_dashboard(request):
     recent_payments = FeePayment.objects.select_related('student_fee__student').order_by('-payment_date')[:10]
 
     # Overdue fees
+    today_str = request.GET.get('today')
+    try:
+        overdue_cutoff = date.fromisoformat(today_str) if today_str else date.today()
+    except ValueError:
+        overdue_cutoff = date.today()
+
     overdue_fees = StudentFee.objects.filter(
         Q(status='pending') | Q(status='partially_paid'),
-        fee_structure__due_date__lt=request.GET.get('today', '2024-01-01')
+        fee_structure__due_date__lt=overdue_cutoff
     ).select_related('student', 'fee_structure')[:10]
 
     # Payment methods distribution
