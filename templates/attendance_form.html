@@ -9,19 +9,19 @@
     .form-group { margin-bottom: 1.5rem; }
     .form-label { font-weight: 600; color: #374151; margin-bottom: 0.5rem; display: block; }
     .form-control { border: 2px solid #e5e7eb; border-radius: 0.5rem; padding: 0.75rem; font-size: 1rem; width: 100%; }
-    .form-control:focus { border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1); outline: none; }
+    .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1); outline: none; }
     .form-select { border: 2px solid #e5e7eb; border-radius: 0.5rem; padding: 0.75rem; font-size: 1rem; width: 100%; }
-    .form-select:focus { border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1); outline: none; }
+    .form-select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1); outline: none; }
     .status-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
     .status-option { padding: 1rem; border: 2px solid #e5e7eb; border-radius: 0.5rem; cursor: pointer; text-align: center; transition: all 0.2s ease; }
-    .status-option:hover { border-color: #4f46e5; background: #f9f5ff; }
+    .status-option:hover { border-color: var(--primary); background: rgba(var(--primary-rgb), 0.05); }
     .status-option input[type="radio"] { display: none; }
-    .status-option.checked { border-color: #4f46e5; background: #f9f5ff; }
+    .status-option.checked { border-color: var(--primary); background: rgba(var(--primary-rgb), 0.05); }
     .status-icon { font-size: 2rem; margin-bottom: 0.5rem; color: #6b7280; }
     .status-option.checked .status-icon { color: #10b981; }
     .status-label { font-weight: 600; color: #1f2937; }
-    .btn-submit { background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%); border: none; padding: 0.75rem 2rem; border-radius: 0.5rem; color: white; font-weight: 600; cursor: pointer; width: 100%; }
-    .btn-submit:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3); }
+    .btn-submit { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); border: none; padding: 0.75rem 2rem; border-radius: 0.5rem; color: white; font-weight: 600; cursor: pointer; width: 100%; }
+    .btn-submit:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.3); }
     .btn-cancel { background: #6b7280; border: none; padding: 0.75rem 2rem; border-radius: 0.5rem; color: white; font-weight: 600; text-decoration: none; display: inline-block; width: 100%; text-align: center; }
     .btn-cancel:hover { background: #4b5563; color: white; text-decoration: none; }
     .button-group { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }

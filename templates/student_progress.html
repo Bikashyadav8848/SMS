@@ -207,6 +207,7 @@
     document.addEventListener('DOMContentLoaded', function() {
         const candlestickWeekly = {{ candlestick_weekly|safe|default:"[]" }};
         const candlestickMonthly = {{ candlestick_monthly|safe|default:"[]" }};
+        const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim() || '#4f46e5';
 
         const chartCommonOptions = {
             responsive: true,
@@ -304,7 +305,7 @@
                         {
                             label: 'Completed',
                             data: completed,
-                            backgroundColor: '#4f46e5', // indigo
+                            backgroundColor: primaryColor, // use theme primary color
                             borderRadius: remaining.map(r => r === 0 ? 6 : 0),
                             barThickness: 'flex',
                             maxBarThickness: 32

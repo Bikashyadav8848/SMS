@@ -1,6 +1,7 @@
 /* Custom Styles for Student Management System */
 :root {
     --primary-color: #4f46e5;
+    --primary-color-dark: #4338ca;
     --secondary-color: #10b981;
     --danger-color: #ef4444;
     --warning-color: #f59e0b;
@@ -26,7 +27,7 @@ body {
 
 /* Navbar Styling */
 .navbar {
-    background: linear-gradient(90deg, var(--primary-color) 0%, #6366f1 100%) !important;
+    background: linear-gradient(90deg, var(--primary-color) 0%, var(--primary-color-dark) 100%) !important;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     padding: 1rem 0 !important;
 }
@@ -112,7 +113,7 @@ h2::before {
 }
 
 .btn-primary:hover {
-    background: #4338ca;
+    background: var(--primary-color-dark);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
 }
@@ -181,7 +182,7 @@ h2::before {
 }
 
 .card-header {
-    background: linear-gradient(90deg, var(--primary-color) 0%, #6366f1 100%);
+    background: linear-gradient(90deg, var(--primary-color) 0%, var(--primary-color-dark) 100%);
     color: white;
     border: none;
     border-radius: 0.75rem 0.75rem 0 0;
@@ -209,7 +210,7 @@ h2::before {
 }
 
 .table thead {
-    background: linear-gradient(90deg, var(--primary-color) 0%, #6366f1 100%);
+    background: linear-gradient(90deg, var(--primary-color) 0%, var(--primary-color-dark) 100%);
     color: white;
 }
 
@@ -247,7 +248,7 @@ h2::before {
 
 .table tbody a:hover {
     text-decoration: underline;
-    color: #4338ca;
+    color: var(--primary-color-dark);
 }
 
 /* Forms */

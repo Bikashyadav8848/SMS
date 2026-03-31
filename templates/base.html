@@ -12,15 +12,23 @@
             {% if sys_settings.theme_color == 'sapphire' %}
             --primary: #2563eb;
             --primary-dark: #1d4ed8;
+            --primary-color: #2563eb;
+            --primary-rgb: 37, 99, 235;
             {% elif sys_settings.theme_color == 'emerald' %}
             --primary: #10b981;
             --primary-dark: #059669;
+            --primary-color: #10b981;
+            --primary-rgb: 16, 185, 129;
             {% elif sys_settings.theme_color == 'slate' %}
             --primary: #475569;
             --primary-dark: #334155;
+            --primary-color: #475569;
+            --primary-rgb: 71, 85, 105;
             {% else %}
             --primary: #4f46e5;
             --primary-dark: #4338ca;
+            --primary-color: #4f46e5;
+            --primary-rgb: 79, 70, 229;
             {% endif %}
             --sidebar-bg: #111827;
             --sidebar-hover: #1f2937;
@@ -202,12 +210,25 @@
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
         .btn-primary {
-            background-color: var(--primary);
-            border-color: var(--primary);
+            background-color: var(--primary) !important;
+            border-color: var(--primary) !important;
         }
         .btn-primary:hover {
-            background-color: var(--primary-dark);
-            border-color: var(--primary-dark);
+            background-color: var(--primary-dark) !important;
+            border-color: var(--primary-dark) !important;
+        }
+        /* Override Bootstrap utilities to use theme color */
+        .bg-primary {
+            background-color: var(--primary) !important;
+        }
+        .text-primary {
+            color: var(--primary) !important;
+        }
+        .border-primary {
+            border-color: var(--primary) !important;
+        }
+        .bg-primary.bg-opacity-10 {
+            background-color: rgba(var(--primary-rgb), 0.1) !important;
         }
         
         @media (max-width: 992px) {

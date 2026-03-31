@@ -177,6 +177,11 @@ class FeePaymentCreateView(CreateView):
     fields = ['student_fee', 'amount', 'payment_date', 'payment_method', 'transaction_id', 'remarks']
     success_url = reverse_lazy('fee_payments')
 
+    def get_initial(self):
+        initial = super().get_initial()
+        initial['payment_date'] = date.today()
+        return initial
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         student_id = self.request.GET.get('student')

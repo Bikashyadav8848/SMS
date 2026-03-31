@@ -84,13 +84,13 @@ class TeacherListView(ListView):
 class TeacherCreateView(CreateView):
     model = Teacher
     template_name = 'teacher_form.html'
-    fields = ['name', 'email', 'phone', 'subject', 'qualification', 'experience_years']
+    fields = ['teacher_id', 'name', 'email', 'phone', 'subject', 'qualification', 'experience_years']
     success_url = reverse_lazy('teachers')
 
 class TeacherUpdateView(UpdateView):
     model = Teacher
     template_name = 'teacher_form.html'
-    fields = ['name', 'email', 'phone', 'subject', 'qualification', 'experience_years']
+    fields = ['teacher_id', 'name', 'email', 'phone', 'subject', 'qualification', 'experience_years']
     success_url = reverse_lazy('teachers')
 
 class TeacherDeleteView(DeleteView):
@@ -162,6 +162,12 @@ class AttendanceCreateView(CreateView):
     template_name = 'attendance_form.html'
     fields = ['student', 'date', 'status']
     success_url = reverse_lazy('attendance')
+
+    def get_initial(self):
+        from django.utils import timezone
+        initial = super().get_initial()
+        initial['date'] = timezone.now().date()
+        return initial
 
 class AttendanceUpdateView(UpdateView):
     model = Attendance
