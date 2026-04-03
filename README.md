@@ -17,8 +17,8 @@ Follow these simple steps to run this project on a new system:
 
 ### 1. Clone the Project
 ```bash
-git clone https://github.com/Bikashyadav8848/FDP.git
-cd FDP
+git clone https://github.com/Bikashyadav8848/SMS.git
+cd SMS
 ```
 
 ### 2. Setup Virtual Environment
